@@ -30,7 +30,8 @@ IF(
         SalesTable[calendarMonth] < CurrMonth,
         MAX((diff23 + (diff24) + (diff25)) / 3, -1),
         MAX((diff23 + (3*diff24)) / 4, -1)
-))
+      )
+)
 
 
   
@@ -90,3 +91,17 @@ VAR DiffPct = DIVIDE(Diff, Revenue2024)
 RETURN
     IF(Revenue2025 > 0, DiffPct, BLANK())
 
+
+  
+-- -- -- -- -- -- -- -- -- -- -- -- -- 
+      --- Annual Revenue CY ---
+-- -- -- -- -- -- -- -- -- -- -- -- --
+Revenue 2024 = 
+    CALCULATE(
+        SUM('Sales_Normal'[Revenue]), 
+            FILTER('Sales_Normal', 
+                'Sales_Normal'[invoiceDate] >= DATE(2024, 1, 1) &&
+                'Sales_Normal'[invoiceDate] <= DATE(2024, 12, 31
+                )
+            )
+        )
